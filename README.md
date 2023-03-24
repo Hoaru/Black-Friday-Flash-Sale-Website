@@ -5,7 +5,7 @@ For example, the normal price of an iPhone 14 is $799, and some websites would l
 point, it would lead to a problem that a large amount of purchasing request. Therefore, I simulate such Flush Sale scene and
 develope a website to solve this problem.
 
-Front End: HTML5 + javascript/CSS + lua
+Front End: HTML + javascript/CSS + Lua
 
 Back End: Java
 
