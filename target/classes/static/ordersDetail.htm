@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Orders Detail</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!-- jquery -->
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <!-- bootstrap -->
+  <link rel="stylesheet" type="text/css"
+        href="/bootstrap/css/bootstrap.min.css" />
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+  </script>
+  <!-- layer -->
+  <script type="text/javascript" src="/layer/layer.js"></script>
+  <!-- common.js -->
+  <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+  <div class="panel-heading">Flash Orders Detail</div>
+  <table class="table" id="orders">
+    <tr>
+      <td>Name</td>
+      <td id="goodsName" colspan="3"></td>
+    </tr>
+    <tr>
+      <td>Image</td>
+      <td colspan="2"><img id="goodsImg" width="200" height="200" /></td>
+    </tr>
+    <tr>
+      <td>Orders Price</td>
+      <td colspan="2" id="goodsPrice"></td>
+    </tr>
+    <tr>
+      <td>Orders placed time</td>
+      <td id="createDate" colspan="2"></td>
+    </tr>
+    <tr>
+      <td>Orders Status</td>
+      <td id="status">
+<!--        <span if="${orders.status eq 0}">Unpaid</span>-->
+<!--        <span if="${orders.status eq 1}">To be shipped</span>-->
+<!--        <span if="${orders.status eq 2}">Shipped</span>-->
+<!--        <span if="${orders.status eq 3}">Delivered</span>-->
+<!--        <span if="${orders.status eq 4}">Refunded</span>-->
+<!--        <span if="${orders.status eq 5}">Finished</span>-->
+      </td>
+      <td>
+        <button class="btn btn-primary btn-block" type="submit" id="payButton">Pay Now</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Receiver</td>
+      <td colspan="2">HOHO 11111111111</td>
+    </tr>
+    <tr>
+      <td>Delivery Address</td>
+      <td colspan="2">Irvine, CA</td>
+    </tr>
+  </table>
+</div>
+<script>
+  $(function(){
+    getOrdersDetail();
+  });
+
+  function getOrdersDetail(){
+    var ordersId = g_getQueryString("ordersId");
+    $.ajax({
+      url: '/orders/detail',
+      type: 'GET',
+      data: {
+        ordersId: ordersId
+      },
+      success:function(data){
+        if(data.code==200){
+          render(data.obj);
+        }
+        else{
+          layer.msg(data.message);
+        }
+      },
+      error:function(){
+        layer.msg("Client Request Error");
+      }
+    })
+  }
+
+  function render(detail){
+    var goods = detail.goodsVo;
+    var orders = detail.orders;
+    $("#goodsName").text(goods.goodsName);
+    $("#goodsImg").attr("src", goods.goodsImg);
+    $("#goodsPrice").text(orders.goodsPrice);
+    $("#createDate").text(new Date(orders.createDate).format("yyyy-MM-dd HH:mm:ss"));
+    var status = orders.status;
+    var statusText = "";
+    switch(status){
+      case 0:
+        statusText = "Unpaid";
+        break;
+      case 1:
+        statusText = "To be shipped";
+        break;
+      case 2:
+        statusText = "Shipped";
+        break;
+      case 3:
+        statusText = "Delivered";
+        break;
+      case 4:
+        statusText = "Refunded";
+        break;
+      case 5:
+        statusText = "Finished";
+        break;
+    }
+    $("#status").text(statusText);
+  }
+</script>
+</body>
+</html>

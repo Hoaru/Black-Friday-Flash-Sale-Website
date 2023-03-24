@@ -1,0 +1,2 @@
+INSERT INTO `t_users` VALUES
+(11111111111, 'admin', 'b7797cce01b4b131b433b6acf4add449', '1a2b3c4d', default, default, default, default);

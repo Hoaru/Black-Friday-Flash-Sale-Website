@@ -1,0 +1,134 @@
+#如有端口冲突，可指定端口。（默认8080）
+server:
+  port: 8081
+spring:
+  # 静态资源处理
+  resources:
+    # 启用默认静态资源处理
+    add-mappings: true
+    cache:
+      cachecontrol:
+        # 缓存响应时间，单位秒
+        max-age: 3600
+    chain:
+      # 资源链启动缓存，默认启动
+      cache: true
+      # 启用资源链，默认禁用
+      enabled: true
+      # 启用压缩资源(gzip,brotli)解析，默认禁用
+      compressed: true
+      #   启用h5应用缓存，默认禁用
+      html-application-cache: true
+    static-locations: classpath:/static/
+  # thymleaf settings
+  thymleaf:
+    # close cache
+    cache: false
+    # datasource settings
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+# 上海格式
+    # url: jdbc:mysql://localhost:3306/snapdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+# 程序：本机，数据库：本机
+    url: jdbc:mysql://localhost:3306/snapdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Pacific
+    username: root
+    password: root
+## 程序：本机，数据库：linux
+#    url: jdbc:mysql://192.168.77.138:3306/snapdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Pacific
+#    username: xxxx
+#    password: 1234
+## 程序：linux，数据库：linux
+#    url: jdbc:mysql://localhost:3306/snapdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=US/Pacific
+#    username: xxxx
+#    password: 1234
+# springboot self fastest connection pool
+    hikari:
+      #name
+      pool-name: DateHikariCP
+      # min idle connection num
+      mininum-idle: 5
+      # max idle connection lifetime (default: 10 mins)
+      idle-timeout: 1800000
+      # max connection num (default: 10)
+      maximum-pool-size: 10
+      # auto comit of the connections return from connection pool
+      auto-commit: true
+      # max lifetime (0 represents for immortal, default: 30 mins)
+      max-lifetime: 1800000
+      # connection timeout (default: 30 s)
+      connection-timeout: 30000
+      # search sentence for testing availability of connection
+      connection-test-query: SELECT 1
+
+  # Redis配置
+  redis:
+    # ip
+    host: 192.168.77.138
+    # 端口
+    port: 6379
+    # 默认库
+    database: 0
+    # 连接超时时间
+    timeout: 10000ms
+    lettuce:
+      pool:
+        # 最大连接数
+        max-active: 8
+        # 最大连接阻塞等待时间，默认-1
+        max-wait: 10000ms
+        # 最大空闲连接，默认8
+        max-idle: 200
+        # 最小空闲连接，默认0
+        min-idle: 5
+
+  # RabbitMQ
+  rabbitmq:
+    # 服务器
+    host: 192.168.77.137
+    # 用户名
+    username: guest
+    # 密码
+    password: guest
+    # 虚拟主机
+    virtual-host: /
+    # 端口
+    port: 5672
+    # 监听器
+    listener:
+      simple:
+        # 消费者最小数量
+        concurrency: 10
+        # 消费者最大数量
+        max-concurrency: 10
+        # 限制消费者每次最多处理一条消息，处理完再继续下一条
+        prefetch: 1
+        # 启动时是否默认启动容器，默认true
+        auto-startup: true
+        # 被拒绝时是否自动进入队列
+        default-requeue-rejected: true
+    template:
+      retry:
+        # 开启重试，默认false
+        enabled: true
+        # 重试时间，默认1000ms
+        initial-interval: 1000ms
+        # 重试最大次数，默认3次
+        max-attempts: 3
+        # 重试最大间隔时间，默认10000ms
+        max-interval: 10000ms
+        # 重试间隔层数。比如2.0,表示后一次是前一次时间的2.0倍，若第一次10是，则第二次20s，第三次30s
+        multiplier: 1
+
+
+
+  # Mybatis-plus配置
+  mybatis-plus:
+    # Mapper.xml设置(mapping file)
+    mapper-location: classpath*:/mapper/*Mapper.xml
+    # 返回数据类型的别名 (默认: 类名)
+    type-aliases-package: com.pro.snap.pojo
+
+  # Mybatis-plus sql登陆设置 (功能包&接口)
+  logging:
+    level:
+      com.pro.snap.mapping: debug

@@ -1,0 +1,16 @@
+SELECT
+	g.id,
+	g.goods_name,
+	g.goods_title,
+	g.goods_img,
+	g.goods_detail,
+	g.goods_price,
+	g.goods_stock,
+	sg.snap_price,
+	sg.stock_count,
+	sg.start_date,
+	sg.end_date
+FROM
+	t_goods g
+LEFT JOIN 
+	t_snap_goods as sg ON g.id = sg.goods_id

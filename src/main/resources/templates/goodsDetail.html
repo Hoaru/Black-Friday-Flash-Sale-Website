@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Goods Detail</title>
+  <!-- jquery -->
+  <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+  <!-- bootstrap -->
+  <link rel="stylesheet" type="text/css"
+        th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+  <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}">
+  </script>
+  <!-- layer -->
+  <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+  <!-- common.js -->
+  <script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+<div class="panel panel-default">
+  <div class="panel-heading">Flash Goods Detail</div>
+  <div class="panel-body">
+    <span th:if="${users eq null}"> You haven't logged in. Please try again after logging in.<br/></span>
+    <span>No hints on delivery address.</span>
+  </div>
+  <table class="table" id="goods">
+    <tr>
+      <td>Name</td>
+      <td colspan="3" th:text="${goods.goodsName}"></td>
+    </tr>
+    <tr>
+      <td>Image</td>
+      <td colspan="3"><img th:src="@{${goods.goodsImg}}" width="200" height="200"/></td>
+    </tr>
+    <tr>
+      <td>Flash Start Time</td>
+      <td th:text="${#dates.format(goods.startDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+      <td id="snapTip">
+        <input type="hidden" id = "remainSeconds" th:value = "${remainSeconds}">
+        <span th:if="${snapStatus eq 0}">Flash Countdown: <span id="countDown" th:text="${remainSeconds}"></span> seconds</span>
+        <span th:if="${snapStatus eq 1}">Flash Ongoing</span>
+        <span th:if="${snapStatus eq 2}">Flash End</span>
+      </td>
+      <td>
+        <form id="snapForm" method="post" action="/snap/doSnap">
+          <input type="hidden" name="goodsId" th:value="${goods.id}"/>
+          <button class="btn btn-primary btn-block" type="submit" id="buyButton">Flash Now</button>
+        </form>
+      </td>
+
+    </tr>
+    <tr>
+      <td>Original Price</td>
+      <td colspan="3" th:text="${goods.goodsPrice}"></td>
+    </tr>
+    <tr>
+      <td>Flash Price</td>
+      <td colspan="3" th:text="${goods.snapPrice}"></td>
+    </tr>
+    <tr>
+      <td>Stock Count</td>
+      <td colspan="3" th:text="${goods.stockCount}"></td>
+    </tr>
+  </table>
+</div>
+</body>
+<script>
+  $(function(){
+    countDown();
+  });
+  function countDown(){
+    var remainSeconds = $("#remainSeconds").val();
+    var timeout;
+//秒杀还没开始，倒计时
+    if(remainSeconds > 0){
+      $("#buyButton").attr("disabled", true);
+      timeout = setTimeout(function(){
+        $("#countDown").text(remainSeconds - 1);
+        $("#remainSeconds").val(remainSeconds - 1);
+        countDown();
+      },1000);
+//秒杀进行中
+    }
+    else if(remainSeconds == 0){
+      $("#buyButton").attr("disabled", false);
+      if(timeout){
+        clearTimeout(timeout);
+      }
+      $("#snapTip").html("Flash Ongoing");
+//秒杀已经结束
+    }
+    else{
+      $("#buyButton").attr("disabled", true);
+      $("#snapTip").html("Flash End");
+    }
+  }
+</script>
+</html>

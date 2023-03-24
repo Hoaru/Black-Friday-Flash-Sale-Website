@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Goods Detail</title>
+  <!-- jquery -->
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <!-- bootstrap -->
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js">
+  </script>
+  <!-- layer -->
+  <script type="text/javascript" src="/layer/layer.js"></script>
+  <!-- common.js -->
+  <script type="text/javascript" src="/js/common.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+  <div class="panel-heading">Flash Goods Detail</div>
+  <div class="panel-body">
+    <span id="usersTip"> You haven't logged in. Please try again after logging in.<br/></span>
+    <span>No hints on delivery address.</span>
+  </div>
+  <table class="table" id="goods">
+    <tr>
+      <td>Name</td>
+      <td colspan="3" id="goodsName"></td>
+    </tr>
+    <tr>
+      <td>Image</td>
+      <td colspan="3"><img id="goodsImg" width="200" height="200"/></td>
+    </tr>
+    <tr>
+      <td>Flash Start Time</td>
+      <td id="startTime"></td>
+      <td>
+        <input type="hidden" id = "remainSeconds">
+<!--        <span th:if="${snapStatus eq 0}">Flash Countdown: <span id="countDown" th:text="${remainSeconds}"></span> seconds</span>-->
+<!--        <span th:if="${snapStatus eq 1}">Flash Ongoing</span>-->
+<!--        <span th:if="${snapStatus eq 2}">Flash End</span>-->
+        <span id="snapTip"></span>
+      </td>
+      <td>
+<!--        <form id="snapForm" method="post" action="/snap/doSnap">-->
+<!--          <input type="hidden" name="goodsId" id="goodsId"/>-->
+<!--          <button class="btn btn-primary btn-block" type="submit" id="buyButton">Flash Now</button>-->
+<!--        </form>-->
+        <div class="row">
+            <div class="form-inline">
+                <img id="captchaImg" width="130" height="32" onclick="refreshCaptcha()" style="display: none"/>
+                <input id="captcha" class="form-control" style="display: none">
+                <button class="btn btn-primary" type="button" id="buyButton" onclick="getSnapPath()">Flash Now
+                    <input type="hidden" name="goodsId" id="goodsId"/>
+                </button>
+            </div>
+        </div>
+      </td>
+
+    </tr>
+    <tr>
+      <td>Original Price</td>
+      <td colspan="3" id="goodsPrice"></td>
+    </tr>
+    <tr>
+      <td>Flash Price</td>
+      <td colspan="3" id="snapPrice"></td>
+    </tr>
+    <tr>
+      <td>Stock Count</td>
+      <td colspan="3" id="stockCount"></td>
+    </tr>
+  </table>
+</div>
+</body>
+<script>
+    $(function(){
+        // countDown();
+        getDetails();
+    });
+
+    function refreshCaptcha() {
+        $("#captchaImg").attr("src", "/snap/captcha?goodsId=" + $("#goodsId").val() + "&time=" + new Date());
+    }
+
+    function getSnapPath() {
+        var goodsId = $("#goodsId").val();
+        var captcha = $("#captcha").val();
+        g_showLoading();
+        $.ajax({
+            url: '/snap/path',
+            type: 'GET',
+            data:{
+                goodsId: goodsId,
+                captcha: captcha
+            },
+            success: function (data) {
+                if(data.code == 200) {
+                    var path = data.obj;
+                    doSnap(path);
+                }
+                else {
+                    layer.msg("getSnapPath - success - Client Request Error" + " " + data.code);
+                }
+            },
+            error: function() {
+                layer.msg("getSnapPath - error - Client Request Error");
+            }
+        })
+    }
+
+    function doSnap(path) {
+        $.ajax({
+            url: '/snap/' + path + '/doSnap',
+            type: 'POST',
+            data:{
+                goodsId: $("#goodsId").val(),
+                path: path
+            },
+            success: function (data) {
+                if(data.code == 200) {
+                    //window.location.href="/ordersDetail.htm?ordersId="+data.obj.id;
+                    result = getResult($("#goodsId").val());
+                }
+                else{
+                    layer.msg("doSnap - success - Client Request Error" + " " + data.code);
+                }
+            },
+            error: function() {
+                layer.msg("doSnap - error - Client Request Error");
+            }
+        })
+    }
+
+    function getResult (goodsId) {
+        g_showLoading();
+        //layer.msg("&&&&&&&&&^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        $.ajax({
+            url: "/snap/getResult",
+            type: "GET",
+            data:{
+                goodsId: goodsId
+            },
+            success: function(data) {
+                if(data.code == 200) {
+                    var result = data.obj;
+                    if(result < 0){
+                        layer.msg("Sorry. Flash fail!");
+                    }
+                    else if(result == 0) {
+                        //轮询
+                        setTimeout(function() {
+                            getResult(goodsId);
+                        }, 50);
+                    }
+                    else{
+                        layer.confirm("Congrats. Flash succeed! Check order?", {btn:["Confirm", "Cancel"]},
+                            function() {
+                                window.location.href = "/ordersDetail.htm?ordersId=" + result;
+                            },
+                            function() {
+                                layer.close();
+                            });
+                    }
+                }
+                else {
+                    layer.msg("getResult - success - Client Request Error" + " " + data.code);
+                }
+            },
+            error: function() {
+                layer.msg("getResult - error - Client Request Error")
+            }
+        })
+    }
+
+    function getDetails(){
+        var goodsId = g_getQueryString("goodsId");
+        $.ajax({
+          url:'/goods/detail/' + goodsId,
+          type:'GET',
+          success:function(data){
+              if(data.code == 200){
+                  render(data.obj);
+              }
+              else{
+                  layer.msg("getDetails - success - Client Request Error" + " " + data.code);
+              }
+          },
+          error: function(){
+              layer.msg("getDetails - error - Client Request Error");
+          }
+        })
+    }
+
+    function render(detail){
+        var users = detail.users;
+        var goods = detail.goodsVo;
+        var remainSeconds = detail.remainSeconds;
+        // var snapStatus = detail.snapStatus;
+        if(users){
+            $("#usersTip").hide();
+        }
+        $("#goodsName").text(goods.goodsName);
+        $("#goodsImg").attr("src", goods.goodsImg);
+        $("#startTime").text(new Date(goods.startDate).format("yyyy-MM-dd HH:mm:ss"));
+        $("#remainSeconds").val(remainSeconds);
+        $("#goodsId").val(goods.id);
+        $("#goodsPrice").text(goods.goodsPrice);
+        $("#snapPrice").text(goods.snapPrice);
+        $("#stockCount").text(goods.stockCount);
+        countDown();
+    }
+
+    function countDown(){
+        var remainSeconds = $("#remainSeconds").val();
+        var timeout;
+        //秒杀还没开始，倒计时
+        if(remainSeconds > 0){
+            $("#buyButton").attr("disabled", true);
+            $("#snapTip").html("Flash Count Down: " + remainSeconds + "secs");
+            timeout = setTimeout(function(){
+                // $("#countDown").text(remainSeconds - 1);
+                $("#remainSeconds").val(remainSeconds - 1);
+                countDown();
+            },1000);
+            //秒杀进行中
+        }
+        else if(remainSeconds == 0){
+            $("#buyButton").attr("disabled", false);
+            if(timeout){
+                clearTimeout(timeout);
+            }
+            $("#snapTip").html("Flash Ongoing");
+            $("#captchaImg").attr("src", "/snap/captcha?goodsId=" + $("#goodsId").val() + "&time=" + new Date());
+            $("#captchaImg").show();
+            $("#captcha").show();
+            //秒杀已经结束
+        }
+        else{
+            $("#buyButton").attr("disabled", true);
+            $("#snapTip").html("Flash End");
+            $("#captchaImg").hide();
+            $("#captcha").hide();
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,12 @@
+CREATE TABLE users(
+	userid VARCHAR(20) NOT NULL,
+	nickname VARCHAR(255) NOT NULL,
+	password VARCHAR(32) DEFAULT NULL,
+	salt VARCHAR(10) DEFAULT NULL,
+	head VARCHAR(128) DEFAULT NULL,
+	register_date DATE DEFAULT NULL,
+	last_login_date DATE DEFAULT NULL,
+	login_count BIGINT DEFAULT 0,
+	PRIMARY KEY(userid)
+);
+comment on column users.userid is '主键,用户ID,手机号码';
