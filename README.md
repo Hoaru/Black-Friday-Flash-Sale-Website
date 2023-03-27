@@ -11,3 +11,27 @@ Front End: HTML + JavaScript/CSS + Lua
 Back End: Java
 
 Tools& Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale01.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale02.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale03.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale04.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale05.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale06.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale07.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale08.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale09.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale10.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale11.png)
+
+![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale12.png)
