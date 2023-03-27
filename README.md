@@ -13,7 +13,7 @@ Back End: Java
 Tools& Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale01.png)
-
+                                              IMG01_Login page
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale02.png)
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale03.png)
