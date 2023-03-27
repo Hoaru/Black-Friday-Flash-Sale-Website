@@ -13,25 +13,37 @@ Back End: Java
 Tools& Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale01.png)
-                                              IMG01_Login page
+<p align="center">IMG_01_Log in</p>
+
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale02.png)
+<p align="center">IMG_02_Goods list</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale03.png)
+<p align="center">IMG_03_Goods detail(Flash End)</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale04.png)
+<p align="center">IMG_04_Goods detail(Flash Unstart)</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale05.png)
+<p align="center">IMG_05_Goods detail(Flash Ongoing)</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale06.png)
+<p align="center">IMG_06_Goods detail(Wrong Captcha)</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale07.png)
+<p align="center">IMG_07_Goods detail(Flash succees)</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale08.png)
+<p align="center">IMG_08_Orders detail</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale09.png)
+<p align="center">IMG_09_Database</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale10.png)
+<p align="center">IMG_10_Pressure test report</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale11.png)
+<p align="center">IMG_11_Redis manager</p>
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale12.png)
+<p align="center">IMG_12_Redis manager(orders detail)</p>
