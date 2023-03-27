@@ -9,4 +9,4 @@ Front End: HTML + JavaScript/CSS + Lua
 
 Back End: Java
 
-Tools& Framework: SpringBoot, MyBatis, MySQL, Apache JMeter, Redis, Docker, Jenkins, Git
+Tools& Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
