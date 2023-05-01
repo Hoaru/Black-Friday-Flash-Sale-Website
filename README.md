@@ -8,7 +8,7 @@ increased from 560/h to 3600/h after optimization through AJAX, Redis RabbitMQ.
 
 Programming Language: HTML, JavaScript/CSS, Lua, Java
 
-Tools& Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
+Tools & Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
 
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale01.png)
 <p align="center">IMG_01_Log in</p>
