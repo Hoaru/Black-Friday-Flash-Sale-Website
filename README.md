@@ -6,9 +6,7 @@ point, it would lead to a problem that a large amount of purchasing request whic
 this problem, I develope a website to solve this problem. According to the test result from Apache JMeter, the throughput
 increased from 560/h to 3600/h after optimization through AJAX, Redis RabbitMQ.
 
-Front End: HTML + JavaScript/CSS + Lua
-
-Back End: Java
+Programming Language: HTML, JavaScript/CSS, Lua, Java
 
 Tools& Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
 
