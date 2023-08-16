@@ -10,6 +10,14 @@ Programming Language: HTML, JavaScript/CSS, Lua, Java
 
 Tools & Framework: SpringBoot, MyBatis-Plus, MySQL, Docker, Redis, RabbitMQ, AJAX, Apache JMeter
 
+- Developed a website for e-commerce companies to conduct limited-time sales events during Black Friday. 
+- Built backend with Java and frontend with HTML, CSS, and Lua in a Spring Boot environment.
+- Created the database with MySQL to store the users’ information and used MyBatis-Plus to simplify the operation.
+- Utilized AJAX to update web pages dynamically to improve data transmission efficiency.
+- Deployed Redis with Docker in a Linux environment to decrease access to the database. 
+- Implemented RabbitMQ for order serialization and captcha for order placement security to prevent scripts and scalpers.
+- Increased throughput from 560/h to 3600/h according to the Apache JMeter pressure tests.
+
 ![image](https://github.com/Hoaru/Black-Friday-Flash-Sale-Website/blob/master/IMG/FlashSale01.png)
 <p align="center">IMG_01_Log in</p>
 
